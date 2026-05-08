@@ -17,9 +17,10 @@
     {
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShell {
-          packages = [
-            pkgs.rustc
-            pkgs.cargo
+          packages = with pkgs; [
+            cargo
+            rust-analyzer
+            rustc
           ];
         };
       });
