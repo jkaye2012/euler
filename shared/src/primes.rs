@@ -28,6 +28,22 @@ pub fn primes_up_to(limit: usize) -> Vec<usize> {
         .collect()
 }
 
+/// Returns all prime factors of `target`; relatively inefficient brute-force method
+pub fn prime_factors(mut target: u64) -> Vec<u64> {
+    let mut result = Vec::new();
+    for num in 2..target / 2 {
+        if is_prime(num) && target % num == 0 {
+            target /= num;
+            result.push(num);
+            if target == 1 {
+                break;
+            }
+        }
+    }
+
+    result
+}
+
 /// Trial-division primality test. Fine for small n; use a sieve for bulk work.
 pub fn is_prime(n: u64) -> bool {
     if n < 2 {
