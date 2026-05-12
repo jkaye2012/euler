@@ -1,9 +1,9 @@
 [workspace]
-resolver = "2"
+resolver = "3"
 members = ["shared", "problems"]
 
 [workspace.package]
-edition = "2021"
+edition = "2024"
 
 [profile.release]
 lto = "fat"

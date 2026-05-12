@@ -17,10 +17,12 @@
     {
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShell {
+          name = "euler";
           packages = with pkgs; [
             cargo
             rust-analyzer
             rustc
+            rustfmt
           ];
         };
       });
