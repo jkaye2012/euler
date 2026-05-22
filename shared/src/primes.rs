@@ -19,6 +19,27 @@ pub fn sieve(limit: usize) -> Vec<bool> {
     is_prime
 }
 
+/// Returns the nth prime number, where n is a 1-based index (the 1st prime number is 2).
+///
+/// ```
+/// use shared::primes::nth_prime;
+/// assert_eq!(nth_prime(6), 13);
+/// assert_eq!(nth_prime(7), 17);
+/// assert_eq!(nth_prime(8), 19);
+/// ```
+pub fn nth_prime(n: usize) -> usize {
+    let nf = n as f64;
+    let upper_bound = (nf * (nf.ln() + nf.ln().ln())) as usize;
+    let s = sieve(upper_bound);
+    s.iter()
+        .enumerate()
+        .filter(|(_, prime)| **prime)
+        .take(n)
+        .last()
+        .unwrap()
+        .0
+}
+
 /// Returns all primes up to and including `limit`.
 pub fn primes_up_to(limit: usize) -> Vec<usize> {
     sieve(limit)
