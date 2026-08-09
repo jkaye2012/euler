@@ -37,6 +37,31 @@ impl Iterator for Fibonacci {
     }
 }
 
+pub struct TriangleNumbers {
+    curr: u64,
+    curr_term: u64,
+}
+
+impl TriangleNumbers {
+    pub fn new() -> Self {
+        Self {
+            curr: 1,
+            curr_term: 2,
+        }
+    }
+}
+
+impl Iterator for TriangleNumbers {
+    type Item = u64;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        let curr = self.curr;
+        self.curr = self.curr + self.curr_term;
+        self.curr_term += 1;
+        Some(curr)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
