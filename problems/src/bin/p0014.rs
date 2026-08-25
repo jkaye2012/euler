@@ -4,6 +4,7 @@ fn main() {
     let mut longest = 0;
     let mut result = 0;
     for start in 500001..1000000 {
+        // Could memoize, but why bother when it's fast enough?
         let seq = CollatzSequence::new(start);
         let length = seq.count();
         if length >= longest {

@@ -15,6 +15,16 @@ pub fn lcm(a: u64, b: u64) -> u64 {
     }
 }
 
+pub fn choose(n: u64, k: u64) -> u128 {
+    assert!(n >= k, "n must be greater than or equal to k");
+    let k = k.min(n - k);
+    let mut result = 1u128;
+    for i in 1u128..=k as u128 {
+        result = result * (n as u128 - k as u128 + i) / i;
+    }
+    result
+}
+
 pub struct Fibonacci {
     prev: u64,
     curr: u64,
