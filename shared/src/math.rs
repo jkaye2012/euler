@@ -62,6 +62,35 @@ impl Iterator for TriangleNumbers {
     }
 }
 
+pub struct CollatzSequence {
+    curr: u64,
+}
+
+impl CollatzSequence {
+    pub fn new(start: u64) -> Self {
+        Self { curr: start }
+    }
+}
+
+impl Iterator for CollatzSequence {
+    type Item = u64;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.curr == 0 {
+            None
+        } else if self.curr == 1 {
+            self.curr = 0;
+            Some(1)
+        } else if self.curr % 2 == 0 {
+            self.curr /= 2;
+            Some(self.curr)
+        } else {
+            self.curr = self.curr * 3 + 1;
+            Some(self.curr)
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
