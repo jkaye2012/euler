@@ -1,7 +1,7 @@
 use std::{
     fmt::{self, Display},
     iter::repeat,
-    ops::{Add, Mul, MulAssign},
+    ops::{Add, AddAssign, Mul, MulAssign},
     slice::Iter,
     str::FromStr,
 };
@@ -115,6 +115,28 @@ impl Add for BigUint {
     }
 }
 
+impl Add<u32> for BigUint {
+    type Output = BigUint;
+
+    fn add(self, rhs: u32) -> Self::Output {
+        self + BigUint::from(rhs)
+    }
+}
+
+impl Add<BigUint> for u32 {
+    type Output = BigUint;
+
+    fn add(self, rhs: BigUint) -> Self::Output {
+        BigUint::from(self) + rhs
+    }
+}
+
+impl AddAssign<u32> for BigUint {
+    fn add_assign(&mut self, rhs: u32) {
+        *self = self.clone() + rhs;
+    }
+}
+
 impl Mul<&BigUint> for &BigUint {
     type Output = BigUint;
 
@@ -153,6 +175,36 @@ impl Mul<BigUint> for &BigUint {
 
     fn mul(self, rhs: BigUint) -> Self::Output {
         self * &rhs
+    }
+}
+
+impl Mul<u32> for BigUint {
+    type Output = BigUint;
+
+    fn mul(self, rhs: u32) -> Self::Output {
+        self * BigUint::from(rhs)
+    }
+}
+
+impl Mul<u32> for &BigUint {
+    type Output = BigUint;
+
+    fn mul(self, rhs: u32) -> Self::Output {
+        self * &BigUint::from(rhs)
+    }
+}
+
+impl Mul<BigUint> for u32 {
+    type Output = BigUint;
+
+    fn mul(self, rhs: BigUint) -> Self::Output {
+        BigUint::from(self) * rhs
+    }
+}
+
+impl MulAssign<u32> for BigUint {
+    fn mul_assign(&mut self, rhs: u32) {
+        *self = &*self * rhs;
     }
 }
 

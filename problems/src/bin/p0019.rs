@@ -20,19 +20,10 @@ enum Month {
 impl Month {
     fn num_days(&self, year: u32) -> u32 {
         match self {
-            Self::Jan => 31,
             Self::Feb if is_leap(year) => 29,
             Self::Feb => 28,
-            Self::Mar => 31,
-            Self::Apr => 30,
-            Self::May => 31,
-            Self::Jun => 30,
-            Self::Jul => 31,
-            Self::Aug => 31,
-            Self::Sep => 30,
-            Self::Oct => 31,
-            Self::Nov => 30,
-            Self::Dec => 31,
+            Self::Apr | Self::Jun | Self::Sep | Self::Nov => 30,
+            _ => 31,
         }
     }
 
